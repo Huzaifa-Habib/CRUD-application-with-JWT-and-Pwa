@@ -1,0 +1,230 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
+body{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgba(128, 128, 128, 0.144);
+  overflow: hidden;
+}
+.table{
+  overflow-y: scroll;
+  height: calc(25vh);
+}
+
+
+.input-div{
+  background-color: white;
+  width: calc(50vw);
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-top: 20px;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-right: 10px;
+  margin-bottom: 40px;
+  padding-bottom: 10px;
+
+}
+
+.input-div input,textarea{
+  width: 100%;
+  margin-top: 5px;
+  padding: 5px 0px;
+  border: 1px solid rgba(128, 128, 128, 0.226);
+  border-radius: 5px;
+  padding-left: 5px;
+  outline: none;
+}
+
+.input-div input{
+  margin-top: 20px;
+}
+
+.input-div textarea{
+  margin-top: 20px !important;
+  resize: none;
+}
+
+.input-div textarea:focus{
+  outline: 2px solid dodgerblue;
+}
+
+.input-div input:focus{
+  outline: 2px solid dodgerblue;
+}
+
+.btn{
+  margin-top: 20px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 40%;
+  font-weight: bold !important;
+
+
+}
+
+
+.alert-div{
+  display: none;
+  position: absolute;
+  width: calc(100vw);
+  height: calc(100vh);
+  background-color: rgba(0, 0, 0, 0.315);
+
+
+  
+}
+
+.show-alert{
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 2;
+
+
+
+}
+
+
+
+table tbody tr td{
+  text-align:justify;
+  text-justify: inter-word;
+  text-transform: capitalize;
+
+
+}
+
+table tbody tr td:nth-child(4) button:nth-child(1){
+  margin-left: 40px;
+
+}
+
+table tbody tr td:nth-child(3) img:nth-child(3){
+  margin-left: 5px;
+
+
+
+}
+
+
+.nav{
+  width: calc(100vw) !important;
+}
+
+.nav img{
+  cursor: pointer !important;
+}
+
+.nav-a{
+  color: white !important;
+  padding-left: 10px;
+}
+
+
+
+.input{
+  padding: 0px !important;
+  padding: 0px 20px !important;
+  outline: none;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.emptyError,.lengthError,.descLengthError,.descEmptyError{
+  display: none;
+  font-size: 12px;
+  font-family: monospace;
+  font-weight: bold;
+  padding-left: 10px;
+  color: red;
+
+}
+
+.updateForm input{
+  display: block;
+  width: 90%;
+  margin-top: 5px;
+  margin-left: 5px;
+  border: 1px solid rgba(128, 128, 128, 0.247);
+  border-radius: 10px;
+  padding: 5px 5px;
+
+}
+
+.updateForm input:focus{
+  outline: 3px solid dodgerblue;
+}
+.updateForm textarea:focus{
+  outline: 1px solid dodgerblue;
+}
+
+.updateForm label{
+  font-weight: bold;
+}
+
+.updateBtn{
+  width: 40%;
+
+}
+
+
+.spinner-div{
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.171);
+  height: calc(100vh);
+  width: calc(100vw);
+  display: none;
+
+
+
+}
+
+.spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20%;
+}
+
+@media screen and (max-width:680px)  {
+  .input-div{
+    width: calc(80vw);
+  }
+
+  
+}
+
+@media screen and (max-width:420px)  {
+  .input-div{
+    width: calc(95vw);
+  }
+
+  .btn{
+    width: 53%;
+  }
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
