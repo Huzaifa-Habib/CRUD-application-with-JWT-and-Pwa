@@ -15,7 +15,7 @@ if (window.location.href.split(":")[0] === "http") {
 }
 
 else{
-  baseUrl = "https://lazy-blue-clownfish-wig.cyclic.app"
+  baseUrl = "https://tired-pinafore-mite.cyclic.app/"
 }
 
 
