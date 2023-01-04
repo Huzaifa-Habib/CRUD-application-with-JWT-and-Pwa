@@ -3,10 +3,13 @@ import path from 'path';
 import cors from 'cors';
 import mongoose from "mongoose"
 import cookieParser from "cookie-parser";
+import authApis from './routes/auth.mjs'
+import productApis from './routes/product.mjs';
+import jwt from 'jsonwebtoken';
+import { userModel } from './routes/dbmodels.mjs'
 
-import router from './routes/api.mjs'
 
-
+const SECRET = process.env.SECRET || "mySecret"
 const app = express()
 const port = process.env.PORT || 3000
 const mongodbURI = process.env.mongodbURI || "mongodb+srv://admin:admin123@cluster0.vpuj8pq.mongodb.net/mydatabase?retryWrites=true&w=majority"
@@ -19,11 +22,80 @@ app.use(cors({
 
 }));
 
-// mongoose.set('strictQuery', true);
+app.use('/api/v1', authApis)
+
+app.use('/api/v1',(req, res, next) => {
+
+    console.log("req.cookies: ", req.cookies);
+
+    if (!req?.cookies?.Token) {
+        res.status(401).send({
+            message: "include http-only credentials with every request"
+        })
+        return;
+    }
+
+    jwt.verify(req.cookies.Token, SECRET, function (err, decodedData) {
+        if (!err) {
+
+            console.log("decodedData: ", decodedData);
+
+            const nowDate = new Date().getTime() / 1000;
+
+            if (decodedData.exp < nowDate) {
+
+                res.status(401);
+                res.cookie('Token', '', {
+                    maxAge: 1,
+                    httpOnly: true
+                });
+                res.send({ message: "token expired" })
+
+            } else {
+
+                console.log("token approved");
+
+                req.body.token = decodedData
+                next();
+            }
+        } else {
+            res.status(401).send("invalid token")
+        }
+    });
+})
+app.use("/api/v1",productApis)
+
+const getUser = async (req, res) => {
+
+    let _id = "";
+    if (req.params.id) {
+        _id = req.params.id
+    } else {
+        _id = req.body.token._id
+    }
+
+    try {
+        const user = await userModel.findOne({ _id: _id }, "email firstName lastName _id").exec()
+        if (!user) {
+            res.status(404).send({})
+            return;
+        } else {
+            res.status(200).send(user)
+        }
+
+    } catch (error) {
+
+        console.log("error: ", error);
+        res.status(500).send({
+            message: "something went wrong on server",
+        });
+    }
+}
 
 
+app.get('/api/v1/profile', getUser)
+app.get('/api/v1/profile/:id', getUser)
 
-app.use("/api/v1", router)
 
 
 
@@ -36,28 +108,3 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////mongodb connected disconnected events///////////////////////////////////////////////
-mongoose.connection.on('connected', function () {//connected
-    console.log("Mongoose is connected");
-});
-
-mongoose.connection.on('disconnected', function () {//disconnected
-    console.log("Mongoose is disconnected");
-    process.exit(1);
-});
-
-mongoose.connection.on('error', function (err) {//any error
-    console.log('Mongoose connection error: ', err);
-    process.exit(1);
-});
-
-process.on('SIGINT', function () {/////this function will run jst before app is closing
-    console.log("app is terminating");
-    mongoose.connection.close(function () {
-        console.log('Mongoose default connection closed');
-        process.exit(0);
-    });
-});
-////////////////mongodb connected disconnected events///////////////////////////////////////////////

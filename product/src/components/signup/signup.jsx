@@ -2,6 +2,7 @@ import "./signup.css"
 import { useState,useRef } from 'react';
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
+import  Axios  from "axios";
 
 let baseUrl = ""
 if (window.location.href.split(":")[0] === "http") {
@@ -36,12 +37,13 @@ function Signup() {
         event.preventDefault()
         let errorDiv = document.getElementById("error")
         let alertDiv = document.getElementById("alert")
+      
 
         axios.post(`${baseUrl}/api/v1/signup`, {
             firstName: firstName,
             lastName: lastName,
             email:email,
-            password:password
+            password:password,
           })
 
           .then((response) => {
@@ -105,6 +107,7 @@ function Signup() {
                             setPassword(e.target.value)
 
                         }} />
+
                     <button type="submit">Register</button>
                 </form>
                 <a href="/">Already have an account LogIn.</a>

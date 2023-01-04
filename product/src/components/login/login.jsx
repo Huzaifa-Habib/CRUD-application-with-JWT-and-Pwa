@@ -2,7 +2,6 @@ import "./login.css"
 import { useState,useRef,useContext } from 'react';
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
-import ContextProvider from "../../context/context"
 import { GlobalContext } from '../../context/context';
 
 
@@ -47,7 +46,7 @@ function Login() {
             event.target.reset();
             dispatch({
               type: 'USER_LOGIN',
-              payload: null
+              payload: response.data.profile
             })
 
         

@@ -67,6 +67,7 @@ function Home() {
   let { state, dispatch } = useContext(GlobalContext);
 
 
+
   
 
   if (isSpinner === true) {
@@ -342,8 +343,10 @@ function Home() {
                 >
                 
                 </Nav>
+                <div className='userName'> <p>{state?.user?.firstName}  {state?.user?.lastName}</p> </div>
                 <img src={logout} onClick={logoutHandler} title="logout" height={40}/>
-                <img src={profile} title="Profile" height={35}/>
+               
+
 
 
 

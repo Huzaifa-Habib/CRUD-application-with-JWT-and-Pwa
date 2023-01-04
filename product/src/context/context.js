@@ -5,6 +5,7 @@ export const GlobalContext = createContext("Initial Value");
 
 let data = {
   isLogin: null,
+  user:{}
 }
 
 export default function ContextProvider({ children }) {
