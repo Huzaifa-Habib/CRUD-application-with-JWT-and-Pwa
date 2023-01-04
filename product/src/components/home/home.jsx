@@ -65,6 +65,7 @@ function Home() {
   const lastRef = useRef(null);
   let navigate = useNavigate();
   let { state, dispatch } = useContext(GlobalContext);
+  console.log(state)
 
 
 
